@@ -1,0 +1,29 @@
+html
+  head
+    title Web Crawler
+body
+  include ./header
+  br
+  div#main
+    if page
+      h1 Page #{page.page_id}
+      a(href=page.url target="_blank") #{page.url}
+      div#content
+        p #{page.content}
+        br
+        p Word Count
+        ul
+          each word in Object.keys(page.wordFrequency)
+            li #{word}: #{page.wordFrequency[word]}
+      div#outgoing
+        h4 Outgoing Links
+        each link in page.outgoing
+          a(href="/fruits/" + link.slice(57, -5)) #{link.slice(57, -5)}
+          |&nbsp;
+      br
+      if page.incoming
+        div#incoming
+          h4 Incoming Links
+          each link in page.incoming
+            a(href="/fruits/" + link) #{link}
+            |&nbsp;

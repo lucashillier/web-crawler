@@ -1,0 +1,19 @@
+h1 Web Crawler
+div#header
+  input(type="text" placeholder="Search" id="query")
+  input(type="checkbox" id="boost")
+  label(for="boost") Boost By PageRank
+  br
+  input(type="text" placeholder="Limit" value=10 id="limit")
+  |&nbsp;
+  select(name="Site" id="siteSelect")
+    option(value="fruits") Fruits
+    option(value="personal") Personal
+  br
+  button(type="button" id="search") Search
+  script(src="/search.js")
+  br
+  br
+  a(href="/reset") Reset Database
+  br
+  a(href="/crawl") Crawl Now

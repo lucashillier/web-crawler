@@ -1,0 +1,47 @@
+html
+  head
+    title Web Crawler
+body
+  include ./header
+  br
+  div#main
+    if page
+      h1 Page: #{page.page_id}
+      a(href=page.url target="_blank") #{page.url}
+      div#content
+        p #{page.content}
+        br
+        p Word Count
+        ul
+          each word in Object.keys(page.wordFrequency)
+            li #{word}: #{page.wordFrequency[word]}
+      div#outgoing
+        h4 Outgoing Links
+        each link in page.outgoing
+          -
+            let linkID = link.slice(0, link.indexOf("_"));
+            if (link.indexOf("_") == -1) {
+              linkID = "/all-products";
+              if(!link.includes("page")) {
+                linkID += "-1";
+              }
+            }
+            linkID = linkID.slice(linkID.lastIndexOf("/") + 1);
+            if (link.includes("page")) {
+              linkID += link.slice(
+                link.indexOf("page") + 4,
+                link.indexOf(".html")
+              );
+            }
+            if(linkID == "books") {
+              linkID += "-1"
+            }
+          a(href="/personal/" + linkID) #{linkID}
+          |&nbsp;
+      br
+      if page.incoming
+        div#incoming
+          h4 Incoming Links
+          each link in page.incoming
+            a(href="/personal/" + link) #{link}
+            |&nbsp;

@@ -1,0 +1,17 @@
+html
+  head
+    title Web Crawler
+body
+  include ./header
+  br
+  div#main
+    if pages.length > 0
+      h1 Results For "#{query}"
+      div#content
+        each page in pages
+          a(href="/"+ collection + "/" + page.page_id) #{page.page_id}
+          |&nbsp;
+          |Score: #{page.score}
+          |&nbsp;
+          a(href=page.url target="_blank") Original Page
+          br
